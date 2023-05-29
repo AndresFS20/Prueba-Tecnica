@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-2">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" #searchBox id="search-box" type="search"
+                    placeholder="Nombre del producto" aria-label="Search">
+                <button class="btn btn-outline-danger" (click)="searchByName(searchBox.value)" type="submit">Buscar</button>
+            </form>
+        </div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-2">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" #minPrice id="min-price" type="number"
+                    placeholder="Precio minimo del producto" aria-label="Search">
+                <input class="form-control me-2" #maxPrice id="max-price" type="number"
+                    placeholder="Precio maximo del producto" aria-label="Search">
+                <button class="btn btn-outline-danger" (click)="searchByPrice(minPrice.value, maxPrice.value)" type="submit">Buscar</button>
+            </form>
+        </div>
+    </div>
+    <div class="row g-3">
+        <div class="col-sm-12 col-md-6 col-lg-4" *ngFor="let product of products2show">
+            <div class="card ">
+                <img src="{{product.images[0]}}" class="card-img-top" alt="A Street in Europe">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.title}}</h5>
+                    <p class="card-text">{{product.description}}</p>
+                    <p class="card-text">Precio: ${{product.price}}</p>
+                    <button class="btn btn-primary" (click)="openModal(product)">Ver detalles</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <mat-paginator [length]="products.length" [pageSize]="pageSize" (page)="OnPageChange($event)"
+        aria-label="Select page">
+    </mat-paginator>
+    <ng-template #content>
+        <app-product-detail></app-product-detail>
+    </ng-template>
+</div>
+<br>
+<br>
+<br>
